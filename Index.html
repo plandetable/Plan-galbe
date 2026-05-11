@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Journées Type — Phase Galbe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f4;
+    --card: #ffffff;
+    --rose: #d4756a;
+    --rose-light: #f5e0dd;
+    --peach: #f0c4b0;
+    --deep: #2c1810;
+    --brown: #7a4a3a;
+    --muted: #9a8078;
+    --green: #6a9a6a;
+    --green-light: #e8f2e8;
+    --gold: #c4963a;
+    --gold-light: #faf0dc;
+    --border: #ede5e0;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+font-family: ‘Jost’, sans-serif;
+color: var(–deep);
+padding: 0 0 80px;
+}
+
+/* HERO */
+.hero {
+background: var(–deep);
+padding: 48px 24px 40px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.hero::before {
+content: ‘’;
+position: absolute;
+top: -60px; right: -60px;
+width: 200px; height: 200px;
+background: radial-gradient(circle, rgba(212,117,106,0.3) 0%, transparent 70%);
+border-radius: 50%;
+}
+
+.hero::after {
+content: ‘’;
+position: absolute;
+bottom: -40px; left: -40px;
+width: 150px; height: 150px;
+background: radial-gradient(circle, rgba(240,196,176,0.2) 0%, transparent 70%);
+border-radius: 50%;
+}
+
+.hero-tag {
+font-size: 10px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–rose);
+margin-bottom: 12px;
+}
+
+.hero h1 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 42px;
+font-weight: 600;
+color: #fff;
+line-height: 1.1;
+margin-bottom: 8px;
+}
+
+.hero h1 em {
+font-style: italic;
+color: var(–peach);
+}
+
+.hero-sub {
+font-size: 13px;
+color: #888;
+font-weight: 300;
+margin-bottom: 28px;
+}
+
+.hero-stats {
+display: inline-flex;
+gap: 0;
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+overflow: hidden;
+}
+
+.hero-stat {
+padding: 12px 20px;
+border-right: 1px solid rgba(255,255,255,0.08);
+text-align: center;
+}
+
+.hero-stat:last-child { border-right: none; }
+
+.hero-stat-val {
+font-size: 16px;
+font-weight: 600;
+color: var(–peach);
+display: block;
+}
+
+.hero-stat-label {
+font-size: 10px;
+color: #666;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-top: 2px;
+}
+
+/* TAB NAV */
+.tab-nav {
+display: flex;
+background: var(–card);
+border-bottom: 1px solid var(–border);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.tab {
+flex: 1;
+padding: 16px 8px;
+text-align: center;
+font-size: 12px;
+font-weight: 500;
+color: var(–muted);
+cursor: pointer;
+border-bottom: 2px solid transparent;
+transition: all 0.2s;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+
+.tab.active {
+color: var(–rose);
+border-bottom-color: var(–rose);
+}
+
+.tab-day {
+display: block;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 18px;
+font-weight: 600;
+font-style: italic;
+text-transform: none;
+letter-spacing: 0;
+margin-bottom: 2px;
+color: inherit;
+}
+
+/* CONTENT */
+.day-content { display: none; padding: 24px 16px; }
+.day-content.active { display: block; }
+
+/* MEAL CARD */
+.meal {
+background: var(–card);
+border-radius: 18px;
+margin-bottom: 14px;
+overflow: hidden;
+border: 1px solid var(–border);
+}
+
+.meal-header {
+display: flex;
+align-items: center;
+padding: 14px 18px 10px;
+gap: 10px;
+}
+
+.meal-icon { font-size: 22px; }
+
+.meal-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 19px;
+font-weight: 600;
+color: var(–deep);
+flex: 1;
+}
+
+.meal-macros {
+display: flex;
+gap: 6px;
+}
+
+.macro {
+padding: 4px 10px;
+border-radius: 999px;
+font-size: 11px;
+font-weight: 600;
+}
+
+.macro-kcal { background: var(–gold-light); color: var(–gold); }
+.macro-prot { background: var(–green-light); color: var(–green); }
+
+.meal-recipe {
+padding: 0 18px 6px;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 17px;
+font-style: italic;
+color: var(–rose);
+}
+
+.meal-divider {
+height: 1px;
+background: var(–border);
+margin: 0 18px;
+}
+
+.meal-items {
+padding: 12px 18px 16px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.meal-item {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 13px;
+color: var(–brown);
+}
+
+.meal-item::before {
+content: ‘’;
+width: 5px; height: 5px;
+background: var(–peach);
+border-radius: 50%;
+flex-shrink: 0;
+}
+
+.meal-item strong {
+color: var(–deep);
+font-weight: 500;
+}
+
+.meal-tip {
+margin: 0 18px 16px;
+background: var(–rose-light);
+border-radius: 10px;
+padding: 10px 14px;
+font-size: 12px;
+color: var(–rose);
+font-weight: 500;
+}
+
+/* TOTAL JOURNEE */
+.day-total {
+background: var(–deep);
+border-radius: 18px;
+padding: 20px;
+margin-bottom: 14px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.day-total-label {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 20px;
+font-style: italic;
+color: var(–peach);
+}
+
+.day-total-vals {
+display: flex;
+gap: 12px;
+}
+
+.day-total-val {
+text-align: center;
+}
+
+.day-total-num {
+font-size: 22px;
+font-weight: 600;
+color: #fff;
+display: block;
+}
+
+.day-total-unit {
+font-size: 10px;
+color: #888;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.check { color: #6a9a6a; font-size: 18px; margin-left: 4px; }
+
+/* COURSES */
+.courses-section {
+padding: 24px 16px;
+}
+
+.courses-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 28px;
+font-weight: 600;
+color: var(–deep);
+margin-bottom: 6px;
+}
+
+.courses-title em { font-style: italic; color: var(–rose); }
+
+.courses-sub {
+font-size: 12px;
+color: var(–muted);
+margin-bottom: 24px;
+font-weight: 300;
+}
+
+.courses-category {
+margin-bottom: 20px;
+}
+
+.cat-header {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 10px;
+}
+
+.cat-icon { font-size: 18px; }
+
+.cat-title {
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–muted);
+}
+
+.cat-line {
+flex: 1;
+height: 1px;
+background: var(–border);
+}
+
+.courses-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 8px;
+}
+
+.course-item {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 12px 14px;
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+transition: all 0.15s;
+}
+
+.course-item:active { transform: scale(0.97); }
+
+.course-check {
+width: 20px; height: 20px;
+border: 2px solid var(–border);
+border-radius: 6px;
+flex-shrink: 0;
+transition: all 0.15s;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.course-item.checked .course-check {
+background: var(–green);
+border-color: var(–green);
+}
+
+.course-item.checked .course-check::after {
+content: ‘✓’;
+color: white;
+font-size: 12px;
+font-weight: 700;
+}
+
+.course-item.checked .course-name {
+text-decoration: line-through;
+color: var(–muted);
+}
+
+.course-info { flex: 1; }
+
+.course-name {
+font-size: 13px;
+font-weight: 500;
+color: var(–deep);
+transition: color 0.15s;
+}
+
+.course-qty {
+font-size: 11px;
+color: var(–muted);
+font-weight: 300;
+margin-top: 1px;
+}
+
+.courses-note {
+background: var(–gold-light);
+border-radius: 14px;
+padding: 16px;
+margin-top: 8px;
+font-size: 13px;
+color: var(–gold);
+line-height: 1.6;
+border: 1px solid #ead8b0;
+}
+
+.courses-note strong { font-weight: 600; }
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-tag">✦ Phase Galbe · Semaine type ✦</p>
+  <h1>3 Journées<br><em>Parfaites</em></h1>
+  <p class="hero-sub">Lundi · Mardi · Mercredi</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-val">~1650</span>
+      <span class="hero-stat-label">kcal/jour</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-val">~120g</span>
+      <span class="hero-stat-label">protéines</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-val">-300</span>
+      <span class="hero-stat-label">déficit</span>
+    </div>
+  </div>
+</div>
+
+<div class="tab-nav">
+  <div class="tab active" onclick="showDay(0)">
+    <span class="tab-day">Lundi</span>Fessiers & Quads
+  </div>
+  <div class="tab" onclick="showDay(1)">
+    <span class="tab-day">Mardi</span>Dos & Taille
+  </div>
+  <div class="tab" onclick="showDay(2)">
+    <span class="tab-day">Mercredi</span>Reset
+  </div>
+</div>
+
+<!-- LUNDI -->
+
+<div class="day-content active" id="day-0">
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🌅</span>
+      <span class="meal-title">Petit-déjeuner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">450 kcal</span>
+        <span class="macro macro-prot">30g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Overnight oats Nutella</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Flocons d'avoine</strong> — 40g</div>
+      <div class="meal-item"><strong>Skyr nature</strong> — 150g</div>
+      <div class="meal-item"><strong>Lait</strong> — 50ml</div>
+      <div class="meal-item"><strong>Nutella</strong> — 1 càs</div>
+      <div class="meal-item"><strong>Banane</strong> — ½</div>
+      <div class="meal-item"><strong>Blanc d'œuf</strong> — 1 (mélangé dans les flocons)</div>
+    </div>
+    <div class="meal-tip">💡 Prépare le soir avant — frigo toute la nuit</div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🍽️</span>
+      <span class="meal-title">Déjeuner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">530 kcal</span>
+        <span class="macro macro-prot">40g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Riz + Poulet sauce crème</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Poulet</strong> — 150g</div>
+      <div class="meal-item"><strong>Riz basmati cru</strong> — 100g</div>
+      <div class="meal-item"><strong>Oignon</strong> — 1</div>
+      <div class="meal-item"><strong>Crème légère</strong> — 1 càs</div>
+      <div class="meal-item"><strong>Légumes</strong> — à volonté</div>
+      <div class="meal-item"><strong>Épices</strong> — paprika, sel, poivre</div>
+    </div>
+    <div class="meal-tip">💡 Jour de séance → mange dans l'heure après l'entraînement</div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🍎</span>
+      <span class="meal-title">Collation</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">220 kcal</span>
+        <span class="macro macro-prot">20g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Skyr + fruit + amandes</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Skyr nature</strong> — 150g</div>
+      <div class="meal-item"><strong>Fruit</strong> — 1 (pomme, poire, kiwi…)</div>
+      <div class="meal-item"><strong>Amandes</strong> — 15g</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🌙</span>
+      <span class="meal-title">Dîner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">420 kcal</span>
+        <span class="macro macro-prot">33g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Saumon + riz + légumes</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Saumon</strong> — 120g</div>
+      <div class="meal-item"><strong>Riz cru</strong> — 60g</div>
+      <div class="meal-item"><strong>Légumes verts</strong> — à volonté</div>
+      <div class="meal-item"><strong>Huile d'olive</strong> — 1 càs</div>
+    </div>
+    <div class="meal-tip">💡 Four 180°C 15 min pour le saumon — zéro effort</div>
+  </div>
+
+  <div class="day-total">
+    <span class="day-total-label">Total Lundi</span>
+    <div class="day-total-vals">
+      <div class="day-total-val">
+        <span class="day-total-num">1620<span class="check">✓</span></span>
+        <span class="day-total-unit">kcal</span>
+      </div>
+      <div class="day-total-val">
+        <span class="day-total-num">123g<span class="check">✓</span></span>
+        <span class="day-total-unit">protéines</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MARDI -->
+
+<div class="day-content" id="day-1">
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🌅</span>
+      <span class="meal-title">Petit-déjeuner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">430 kcal</span>
+        <span class="macro macro-prot">27g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Pancakes banane</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Banane</strong> — 1</div>
+      <div class="meal-item"><strong>Œuf entier</strong> — 1</div>
+      <div class="meal-item"><strong>Flocons mixés</strong> — 30g</div>
+      <div class="meal-item"><strong>Skyr nature</strong> — 150g (à côté)</div>
+    </div>
+    <div class="meal-tip">💡 Mixer → poêle antiadhésive — 2 min chaque côté</div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🍽️</span>
+      <span class="meal-title">Déjeuner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">560 kcal</span>
+        <span class="macro macro-prot">38g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Pâtes saumon crème</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Pâtes</strong> — 90g cru</div>
+      <div class="meal-item"><strong>Saumon</strong> — 130g</div>
+      <div class="meal-item"><strong>Oignon</strong> — 1</div>
+      <div class="meal-item"><strong>Crème légère</strong> — 1 càs</div>
+      <div class="meal-item"><strong>Citron</strong> — un filet</div>
+      <div class="meal-item"><strong>Épinards</strong> — une poignée (option)</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🍎</span>
+      <span class="meal-title">Collation</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">160 kcal</span>
+        <span class="macro macro-prot">4g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Pomme + amandes</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Pomme</strong> — 1</div>
+      <div class="meal-item"><strong>Amandes</strong> — 15g</div>
+    </div>
+    <div class="meal-tip">💡 Collation légère car déjeuner et dîner bien chargés en protéines</div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🌙</span>
+      <span class="meal-title">Dîner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">450 kcal</span>
+        <span class="macro macro-prot">34g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Omelette + légumes + riz</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Œufs entiers</strong> — 2</div>
+      <div class="meal-item"><strong>Blancs d'œufs</strong> — 2</div>
+      <div class="meal-item"><strong>Riz cru</strong> — 70g</div>
+      <div class="meal-item"><strong>Courgettes / épinards</strong> — à volonté</div>
+      <div class="meal-item"><strong>Huile d'olive</strong> — ½ càs</div>
+    </div>
+    <div class="meal-tip">💡 Dîner léger et digeste — parfait après séance dos</div>
+  </div>
+
+  <div class="day-total">
+    <span class="day-total-label">Total Mardi</span>
+    <div class="day-total-vals">
+      <div class="day-total-val">
+        <span class="day-total-num">1600<span class="check">✓</span></span>
+        <span class="day-total-unit">kcal</span>
+      </div>
+      <div class="day-total-val">
+        <span class="day-total-num">103g<span class="check">✓</span></span>
+        <span class="day-total-unit">protéines</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MERCREDI -->
+
+<div class="day-content" id="day-2">
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🌅</span>
+      <span class="meal-title">Petit-déjeuner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">450 kcal</span>
+        <span class="macro macro-prot">30g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Overnight oats Nutella</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Flocons d'avoine</strong> — 40g</div>
+      <div class="meal-item"><strong>Skyr nature</strong> — 150g</div>
+      <div class="meal-item"><strong>Lait</strong> — 50ml</div>
+      <div class="meal-item"><strong>Nutella</strong> — 1 càs</div>
+      <div class="meal-item"><strong>Banane</strong> — ½</div>
+      <div class="meal-item"><strong>Blanc d'œuf</strong> — 1</div>
+    </div>
+    <div class="meal-tip">💡 Jour reset → pas de séance, énergie stable toute la matinée</div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🍽️</span>
+      <span class="meal-title">Déjeuner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">490 kcal</span>
+        <span class="macro macro-prot">38g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Poulet + pommes de terre + légumes</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Poulet</strong> — 150g</div>
+      <div class="meal-item"><strong>Pommes de terre</strong> — 250g</div>
+      <div class="meal-item"><strong>Légumes</strong> — à volonté</div>
+      <div class="meal-item"><strong>Huile d'olive</strong> — 1 càs</div>
+      <div class="meal-item"><strong>Herbes / épices</strong> — au goût</div>
+    </div>
+    <div class="meal-tip">💡 Four 200°C 25 min pour les pommes de terre — prépare en avance</div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🍎</span>
+      <span class="meal-title">Collation</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">220 kcal</span>
+        <span class="macro macro-prot">20g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Skyr + fruit + amandes</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Skyr nature</strong> — 150g</div>
+      <div class="meal-item"><strong>Fruit</strong> — 1</div>
+      <div class="meal-item"><strong>Amandes</strong> — 15g</div>
+    </div>
+  </div>
+
+  <div class="meal">
+    <div class="meal-header">
+      <span class="meal-icon">🌙</span>
+      <span class="meal-title">Dîner</span>
+      <div class="meal-macros">
+        <span class="macro macro-kcal">380 kcal</span>
+        <span class="macro macro-prot">30g prot</span>
+      </div>
+    </div>
+    <div class="meal-recipe">Poulet + patate douce + légumes</div>
+    <div class="meal-divider"></div>
+    <div class="meal-items">
+      <div class="meal-item"><strong>Poulet</strong> — 120g</div>
+      <div class="meal-item"><strong>Patate douce</strong> — 200g</div>
+      <div class="meal-item"><strong>Légumes verts</strong> — à volonté</div>
+      <div class="meal-item"><strong>Huile d'olive</strong> — ½ càs</div>
+    </div>
+    <div class="meal-tip">💡 Jour de repos → dîner plus léger, digeste et anti-ballonnements</div>
+  </div>
+
+  <div class="day-total">
+    <span class="day-total-label">Total Mercredi</span>
+    <div class="day-total-vals">
+      <div class="day-total-val">
+        <span class="day-total-num">1540<span class="check">✓</span></span>
+        <span class="day-total-unit">kcal</span>
+      </div>
+      <div class="day-total-val">
+        <span class="day-total-num">118g<span class="check">✓</span></span>
+        <span class="day-total-unit">protéines</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LISTE DE COURSES -->
+
+<div class="courses-section">
+
+  <h2 class="courses-title">Liste de<br><em>Courses</em></h2>
+  <p class="courses-sub">Pour les 3 jours · Coche au fur et à mesure 🛒</p>
+
+  <div class="courses-category">
+    <div class="cat-header">
+      <span class="cat-icon">🥩</span>
+      <span class="cat-title">Protéines</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="courses-grid">
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Poulet</div>
+          <div class="course-qty">~540g (3 repas)</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Saumon</div>
+          <div class="course-qty">~250g (2 repas)</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Œufs</div>
+          <div class="course-qty">1 boîte de 6</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Blancs d'œufs</div>
+          <div class="course-qty">1 brique ou séparer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="courses-category">
+    <div class="cat-header">
+      <span class="cat-icon">🥛</span>
+      <span class="cat-title">Laitages</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="courses-grid">
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Skyr nature</div>
+          <div class="course-qty">3–4 pots 150g</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Crème légère</div>
+          <div class="course-qty">1 petite brique</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Lait</div>
+          <div class="course-qty">100ml suffit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="courses-category">
+    <div class="cat-header">
+      <span class="cat-icon">🌾</span>
+      <span class="cat-title">Féculents</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="courses-grid">
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Riz basmati</div>
+          <div class="course-qty">~400g cru</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Pâtes</div>
+          <div class="course-qty">90g cru</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Flocons d'avoine</div>
+          <div class="course-qty">~220g</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Pommes de terre</div>
+          <div class="course-qty">250g</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Patate douce</div>
+          <div class="course-qty">200g</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="courses-category">
+    <div class="cat-header">
+      <span class="cat-icon">🥦</span>
+      <span class="cat-title">Légumes & Fruits</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="courses-grid">
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Légumes verts</div>
+          <div class="course-qty">courgettes, épinards…</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Oignons</div>
+          <div class="course-qty">2–3</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Bananes</div>
+          <div class="course-qty">3</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Fruits variés</div>
+          <div class="course-qty">pommes, kiwis…</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Citron</div>
+          <div class="course-qty">1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="courses-category">
+    <div class="cat-header">
+      <span class="cat-icon">🫙</span>
+      <span class="cat-title">Épicerie</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="courses-grid">
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Amandes</div>
+          <div class="course-qty">~50g</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Nutella</div>
+          <div class="course-qty">petit pot</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Huile d'olive</div>
+          <div class="course-qty">si besoin</div>
+        </div>
+      </div>
+      <div class="course-item" onclick="toggleCheck(this)">
+        <div class="course-check"></div>
+        <div class="course-info">
+          <div class="course-name">Épices</div>
+          <div class="course-qty">paprika, herbes…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="courses-note">
+    <strong>💡 Astuce meal prep</strong><br>
+    Le dimanche soir : prépare le riz, fais cuire le poulet, coupe les légumes. Tu gagnes 20 min par repas sur la semaine.
+  </div>
+
+</div>
+
+<script>
+  function showDay(index) {
+    document.querySelectorAll('.day-content').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+  }
+</script>
+
+</body>
+</html>
